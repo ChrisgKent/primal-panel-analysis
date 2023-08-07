@@ -28,6 +28,7 @@ process samtools_depth {
     label 'process_single'
     container 'biocontainers/samtools:1.17--hd87286a_1'
     conda 'conda-forge::samtools==1.17--hd87286a_1'
+    publishDir "${params.outdir}/${unique_id}_depth", mode: 'copy'
 
     input:
         tuple val(unique_id), path(align_sam)
