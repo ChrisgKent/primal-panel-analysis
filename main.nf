@@ -13,10 +13,10 @@ process minimap_align {
     conda 'conda-forge::minimap2==2.26--he4a0461_1'
 
     input:
-        tuple val(unique_id), path(barcode_dir), path(ref)
+        tuple val(unique_id), path(barcode_dir), file(ref)
     
     output:
-        tuple val(unique_id), path("${unique_id}_align.sam")
+        tuple val(unique_id), file("${unique_id}_align.sam")
 
     script:
     """
@@ -31,10 +31,10 @@ process samtools_depth {
     publishDir "${params.outdir}/${unique_id}_depth", mode: 'copy'
 
     input:
-        tuple val(unique_id), path(align_sam)
+        tuple val(unique_id), file(align_sam)
     
     output:
-        tuple val(unique_id), path("${unique_id}_depth")
+        tuple val(unique_id), file("${unique_id}_depth")
 
     script:
     """
